@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+</head>
+<body>
+    <h1>留言板</h1>
+    
+    <!-- 显示现有的消息 -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="message : ${messages}">
+                <td th:text="${message.id}"></td>
+                <td th:text="${message.content}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 提交新的消息 -->
+    <form th:action="@{/messages}" th:object="${message}" method="post">
+        <label for="content">内容：</label>
+        <input type="text" id="content" th:field="*{content}" required>
+        <button type="submit">提交</button>
+    </form>
+    
+    <!-- 显示结果消息 -->
+    <p th:text="${resultMsg}"></p>
+</body>
+</html>
